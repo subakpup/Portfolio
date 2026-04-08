@@ -1,0 +1,194 @@
+/* ===== Hero ===== */
+.hero {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding-top: var(--header-height);
+}
+
+.hero__inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero__photo {
+  flex-shrink: 0;
+}
+
+.hero__photo-img {
+  width: 210px;
+  height: 280px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.hero__content {
+  max-width: 640px;
+}
+
+.hero__greeting {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.hero__name {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.hero__role {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.hero__tagline {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--transition-speed);
+}
+
+.hero__btn--primary {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.hero__btn--primary:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+.hero__btn--secondary {
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  background-color: var(--card-bg);
+}
+
+.hero__btn--secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero__photo-img {
+    width: 120px;
+    height: 160px;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__name {
+    font-size: 2rem;
+  }
+
+  .hero__role {
+    font-size: 1.2rem;
+  }
+}
+
+/* ===== About ===== */
+.about__text {
+  max-width: 720px;
+}
+
+.about__text p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.about__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== Contact ===== */
+.contact__content {
+  max-width: 600px;
+}
+
+.contact__desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.contact__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.contact__item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.contact__item-label {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.contact__item-value {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.contact__item-value a {
+  color: var(--text-primary);
+}
+
+.contact__item-value a:hover {
+  color: var(--accent);
+}
