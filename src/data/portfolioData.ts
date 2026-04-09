@@ -60,6 +60,7 @@ const portfolioData: PortfolioData = {
         { name: 'GitHub', icon: 'SiGithub' },
         { name: 'GitLab', icon: 'SiGitlab' },
         { name: 'IntelliJ IDEA', icon: 'SiIntellijidea' },
+        { name: 'Eclipse', icon: 'SiEclipseide' },
         { name: 'VS Code', icon: 'FaCode' },
         { name: 'Postman', icon: 'SiPostman' },
         { name: 'Swagger', icon: 'SiSwagger' },
