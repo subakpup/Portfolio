@@ -1,4 +1,5 @@
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { SiNotion } from 'react-icons/si';
 import type { ProjectItem } from '../../types';
 
 export default function ProjectCard({
@@ -10,9 +11,16 @@ export default function ProjectCard({
   highlights,
   githubUrl,
   liveUrl,
+  notionUrl,
+  image,
 }: ProjectItem) {
   return (
     <article className="project-card">
+      {image && (
+        <div className="project-card__image">
+          <img src={image} alt={`${title} 대표 이미지`} loading="lazy" />
+        </div>
+      )}
       <div className="project-card__header">
         <h3 className="project-card__title">{title}</h3>
         <div className="project-card__links">
@@ -25,6 +33,17 @@ export default function ProjectCard({
               aria-label={`${title} GitHub`}
             >
               <FiGithub />
+            </a>
+          )}
+          {notionUrl && (
+            <a
+              href={notionUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card__link"
+              aria-label={`${title} Notion`}
+            >
+              <SiNotion />
             </a>
           )}
           {liveUrl && (
