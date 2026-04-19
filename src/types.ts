@@ -30,6 +30,13 @@ export interface CertificationItem {
   date: string;
 }
 
+export interface AwardItem {
+  name: string;
+  rank: string;
+  issuer: string;
+  date: string;
+}
+
 export interface ProjectItem {
   title: string;
   period: string;
@@ -39,6 +46,8 @@ export interface ProjectItem {
   highlights?: string[];
   githubUrl?: string;
   liveUrl?: string;
+  notionUrl?: string;
+  image?: string;
 }
 
 export interface PersonalInfo {
@@ -59,5 +68,6 @@ export interface PortfolioData {
   experience: ExperienceItem[];
   education: EducationItem[];
   certifications: CertificationItem[];
+  awards: AwardItem[];
   projects: ProjectItem[];
 }

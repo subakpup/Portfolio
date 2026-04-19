@@ -10,6 +10,7 @@ import Experience from './components/sections/Experience';
 import Education from './components/sections/Education';
 import Projects from './components/sections/Projects';
 import Certifications from './components/sections/Certifications';
+import Awards from './components/sections/Awards';
 import Contact from './components/sections/Contact';
 import './styles/global.css';
 import './styles/components.css';
@@ -42,6 +43,7 @@ function AppContent() {
         <Experience />
         <Education />
         <Certifications />
+        <Awards />
         <Projects />
         <Contact />
       </main>
