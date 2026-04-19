@@ -388,6 +388,22 @@
   transform: translateY(-4px);
 }
 
+.project-card__image {
+  margin: -24px -24px 20px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: var(--card-border);
+}
+
+.project-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .project-card__header {
   display: flex;
   justify-content: space-between;
