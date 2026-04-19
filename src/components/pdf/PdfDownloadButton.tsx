@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import portfolioData from '../../data/portfolioData';
 
 function buildPdfHtml(profileImageUrl: string): string {
-  const { personal, skills, experience, education, certifications, projects } =
+  const { personal, skills, experience, education, certifications, awards, projects } =
     portfolioData;
 
   const skillTagStyle =
@@ -29,15 +29,18 @@ function buildPdfHtml(profileImageUrl: string): string {
 
   const experienceHtml = experience
     .map(
-      (item) => `
+      (item) => {
+        const title = item.title.includes('SSAFY')
+          ? `${item.title} - Java 트랙`
+          : item.title;
+        return `
       <div style="margin-bottom:10px;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
-          <span style="font-size:12px;font-weight:600;color:#1a1a2e;">${item.title}${item.status ? `<span style="${statusBadgeStyle}"><span style="${statusBadgeTextStyle}">${item.status}</span></span>` : ''}</span>
-          <span style="font-size:10px;color:#868e96;">${item.period}</span>
+          <span style="font-size:12px;font-weight:600;color:#1a1a2e;">${title}${item.status ? `<span style="${statusBadgeStyle}"><span style="${statusBadgeTextStyle}">${item.status}</span></span>` : ''}</span>
+          <span style="font-size:10px;color:#868e96;">${item.organization ? `${item.organization} | ` : ''}${item.period}</span>
         </div>
-        ${item.organization ? `<div style="font-size:10px;color:#495057;">${item.organization}</div>` : ''}
-        ${item.highlights ? `<ul style="margin:4px 0;padding-left:14px;">${item.highlights.map((h) => `<li style="font-size:10px;color:#495057;list-style:disc;margin-bottom:2px;">${h}</li>`).join('')}</ul>` : ''}
-      </div>`
+      </div>`;
+      }
     )
     .join('');
 
@@ -46,19 +49,16 @@ function buildPdfHtml(profileImageUrl: string): string {
       (item) => `
       <div style="margin-bottom:10px;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
-          <span style="font-size:12px;font-weight:600;color:#1a1a2e;">${item.institution}</span>
+          <span style="font-size:12px;font-weight:600;color:#1a1a2e;">${item.institution}${item.department ? ` &middot; ${item.department}` : ''}</span>
           <span style="font-size:10px;color:#868e96;">${item.period}</span>
         </div>
-        ${item.department ? `<div style="font-size:10px;color:#495057;">${item.department}${item.degree ? ` | ${item.degree}` : ''}</div>` : ''}
       </div>`
     )
     .join('');
 
   const projectsHtml = projects.length > 0
     ? `
-      <div class="page-break"></div>
-      <div style="padding-top:76px;">
-      <div style="font-size:14px;font-weight:700;color:#2563eb;margin-bottom:10px;padding-bottom:4px;border-bottom:2px solid #2563eb;">Projects</div>
+      <div style="font-size:14px;font-weight:700;color:#2563eb;margin:18px 0 10px;padding-bottom:4px;border-bottom:2px solid #2563eb;">Projects</div>
       ${projects
         .map(
           (p) => `
@@ -73,8 +73,7 @@ function buildPdfHtml(profileImageUrl: string): string {
             ${p.techStack ? `<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;">${p.techStack.map((t) => `<span style="${skillTagStyle}"><span style="${skillTagTextStyle}">${t}</span></span>`).join('')}</div>` : ''}
           </div>`
         )
-        .join('')}
-      </div>`
+        .join('')}`
     : '';
 
   const certsHtml = certifications
@@ -86,6 +85,20 @@ function buildPdfHtml(profileImageUrl: string): string {
       </div>`
     )
     .join('');
+
+  const awardsHtml = awards && awards.length > 0
+    ? `
+      <div style="font-size:14px;font-weight:700;color:#2563eb;margin-bottom:10px;padding-bottom:4px;border-bottom:2px solid #2563eb;">Awards</div>
+      ${awards
+        .map(
+          (award) => `
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
+            <span style="font-size:11px;font-weight:600;color:#1a1a2e;">${award.name} &middot; ${award.rank}</span>
+            <span style="font-size:10px;color:#868e96;">${award.issuer} | ${award.date}</span>
+          </div>`
+        )
+        .join('')}`
+    : '';
 
   return `<!DOCTYPE html>
 <html>
@@ -135,7 +148,7 @@ function buildPdfHtml(profileImageUrl: string): string {
   <hr />
   <div style="font-size:14px;font-weight:700;color:#2563eb;margin-bottom:10px;padding-bottom:4px;border-bottom:2px solid #2563eb;">Certifications</div>
   ${certsHtml}
-  ${projectsHtml}
+  ${awardsHtml || projectsHtml ? `<div class="page-break"></div><div style="padding-top:76px;">${awardsHtml}${projectsHtml}</div>` : ''}
 </body>
 </html>`;
 }
